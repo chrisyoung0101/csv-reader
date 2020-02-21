@@ -12,7 +12,9 @@ public class Customer {
     private String lName;
     private String address;
     private String email;
-    private final static String path="/Users/chrisyoung/Documents/csv-reader/customerAccounts/";
+    private final static String path_in="/Users/chrisyoung/Documents/csv-reader/Customer-IN/";
+    private final static String path_out="/Users/chrisyoung/Documents/csv-reader/Customer-OUT/";
+
     //private int ID;
 
 
@@ -59,9 +61,12 @@ public class Customer {
         this.email = email;
     }
 
+    public static String getPath_in() {
+        return path_in;
+    }
 
-    public static String getPath() {
-        return path;
+    public static String getPath_out() {
+        return path_out;
     }
 
     //building .txt file and including unique ID
@@ -69,7 +74,7 @@ public class Customer {
         Customer customer = new Customer();
 
 
-        String fileName = path + email + ".txt";
+        String fileName = path_in + email + ".txt";
 
         try {
 
@@ -90,6 +95,7 @@ public class Customer {
                 customer.setlName(parsedLine[1]);
                 customer.setAddress(parsedLine[2]);
                 customer.setEmail(parsedLine[3]);
+                customer.saveToFile();
 
             }
         }catch(FileNotFoundException e) {
@@ -108,7 +114,7 @@ public class Customer {
 
         System.out.println("saveToFile method");
 
-        String fileName = path + email + ".txt";
+        String fileName = path_out + email + ".txt";
 
         try {
             BufferedWriter bw =
